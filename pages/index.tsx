@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 
 const Home: NextPage = () => {
+  const { data: session } = useSession();
   return (
     <div>
       <Head>
@@ -12,6 +14,17 @@ const Home: NextPage = () => {
 
       <main>
         <h1>Main</h1>
+        {session ? (
+          <>
+            Signed in as {session.user?.email} <br />
+            <button onClick={() => signOut()}>Sign out</button>
+          </>
+        ) : (
+          <>
+            Not signed in <br />
+            <button onClick={() => signIn()}>Sign in</button>
+          </>
+        )}
       </main>
 
       <footer>
