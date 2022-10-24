@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
+import Link from "next/link";
 
 const Home: NextPage = () => {
   const { data: session } = useSession();
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
       </main>
 
       <footer>
+        <Link href="/admin">Admin</Link>
         <p>Footer</p>
       </footer>
     </div>
