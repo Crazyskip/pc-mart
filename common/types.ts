@@ -19,3 +19,13 @@ export type CategoryWithSubCategoriesAndProducts = Prisma.CategoryGetPayload<{
     };
   };
 }>;
+
+export type SpecificationValue = {
+  spec: string;
+  values: string[];
+};
+
+export type Specification = {
+  title: string;
+  specs: SpecificationValue[];
+};

@@ -38,12 +38,12 @@ async function main() {
     data: { ...subCategories[0], categoryId: cpuCategory.id },
   });
 
-  const amd7950x = await prisma.product.create({
-    data: {
-      ...products[0],
-      brandId: amdBrand.id,
-      subCategoryId: amd7000Sub.id,
-    },
+  const allProducts = products.map((product) => {
+    return { ...product, brandId: amdBrand.id, subCategoryId: amd7000Sub.id };
+  });
+
+  const amd7950x = await prisma.product.createMany({
+    data: allProducts,
   });
 }
 

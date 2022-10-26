@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import type { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,13 +19,31 @@ const SubCategory: NextPage<{
         return (
           <div
             key={product.id}
-            style={{ border: "1px solid white", display: "flex" }}
+            style={{
+              border: "1px solid white",
+              display: "flex",
+              margin: "10px",
+            }}
           >
-            <Image src={images[0]} height="225" width="225" alt="thumbnail" />
+            <Link href={`/products/${product.slug}`}>
+              <a>
+                <Image
+                  src={images[0]}
+                  height="225"
+                  width="225"
+                  alt="thumbnail"
+                />
+              </a>
+            </Link>
             <div style={{ width: "calc(100% - 266px)", margin: "0 20px" }}>
-              <h3>{product.name}</h3>
+              <Link href={`/products/${product.slug}`}>
+                <a>
+                  <h3>{product.name}</h3>
+                </a>
+              </Link>
               <p>{product.overview}</p>
             </div>
+            <div style={{ width: "125px" }}>Price: ${product.price}</div>
           </div>
         );
       })}
