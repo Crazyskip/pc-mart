@@ -1,27 +1,33 @@
-import type { NextPage } from "next";
-import { useSession } from "next-auth/react";
+import type { GetServerSideProps, NextPage } from "next";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 const Admin: NextPage = () => {
-  const { data: session, status } = useSession();
-
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
-
-  if (session && session.user.role === "ADMIN") {
-    return (
-      <div>
-        <h1>Admin</h1>
-        <p>Welcome to the Admin Portal!</p>
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <h1>You are not authorized to view this page!</h1>
-      </div>
-    );
-  }
+  return (
+    <div>
+      <h1>Admin</h1>
+      <p>Welcome to the Admin Portal!</p>
+    </div>
+  );
 };
 
 export default Admin;
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
+  if (!session || session.user.role !== "ADMIN") {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+};
