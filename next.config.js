@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["files.pccasegear.com"],
+    domains: ["images.ctfassets.net"],
   },
 };
 

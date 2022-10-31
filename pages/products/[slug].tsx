@@ -1,26 +1,37 @@
-import { Prisma, Product } from "@prisma/client";
 import type { GetServerSideProps, NextPage } from "next";
+import client from "../../lib/contentful";
 import Image from "next/image";
-import { Specification } from "../../common/types";
-import prisma from "../../lib/prismadb";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS, Document, Node } from "@contentful/rich-text-types";
+import React from "react";
+import { TypeProduct } from "../../common/content-types";
 
-const Product: NextPage<{
-  product: Product | null;
-}> = ({ product }) => {
+const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
   if (product === null) {
     return <div>Product Not Found</div>;
   }
 
-  const images = product.images as string[];
-
-  // Convert JsonValue to Specification Array
-  const specificationsArray = product.specifications as Prisma.JsonArray;
-  const specs = specificationsArray.map((spec) => spec as unknown);
-  const specifications = specs.map((spec) => spec as Specification);
+  const options = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node: Node) => {
+        const { file, title } = node.data.target.fields;
+        return (
+          <Image
+            src={`https:${file.url}`}
+            layout="responsive"
+            height={file.details.image.height}
+            width={file.details.image.width}
+            alt={title}
+            priority
+          />
+        );
+      },
+    },
+  };
 
   return (
     <div style={{ margin: "0 10px" }}>
-      <h1>{product.name}</h1>
+      <h1>{product.fields.name}</h1>
       <div
         style={{
           display: "flex",
@@ -28,46 +39,50 @@ const Product: NextPage<{
           alignItems: "center",
         }}
       >
-        <Image src={images[0]} height="225" width="225" alt="thumbnail" />
-        <h1>${product.price}</h1>
+        <div>
+          <Image
+            src={`https:${product.fields.images[0].fields.file.url}`}
+            height="225"
+            width="225"
+            alt="thumbnail"
+          />
+          <Image
+            src={`https:${product.fields.images[1].fields.file.url}`}
+            height="225"
+            width="225"
+            alt="thumbnail"
+          />
+        </div>
+        <h1>${product.fields.price}</h1>
       </div>
 
       <h2>Overview</h2>
       <hr />
-      <p>{product.overview}</p>
+      {product.fields.overview.content.map((section, index) => {
+        return (
+          <React.Fragment key={`overview-${index}`}>
+            {documentToReactComponents(section as Document, options)}
+          </React.Fragment>
+        );
+      })}
+
+      {product.fields.specifications.content.map((section, index) => {
+        return (
+          <React.Fragment key={`specification-${index}`}>
+            {documentToReactComponents(section as Document)}
+          </React.Fragment>
+        );
+      })}
+
+      <h2>Warranty</h2>
       <hr />
-      <h2>Specifications</h2>
-      <hr />
-      <div>
-        {specifications.map((spec) => (
-          <div key={spec.title}>
-            <h2>{spec.title}</h2>
-            {spec.specs.map((specValue, specIndex) => (
-              <div
-                key={specValue.spec}
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  padding: "20px 0",
-                  backgroundColor: specIndex % 2 === 0 ? "#3b3b3b" : "#292929",
-                }}
-              >
-                <span style={{ width: "50%" }}>{specValue.spec}</span>
-                <span style={{ width: "50%", padding: "0 20px" }}>
-                  {specValue.values.map((val, index) => (
-                    <div key={val + index}>{val}</div>
-                  ))}
-                </span>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-      <hr />
-      <h2>Warranty & Returns</h2>
-      <hr />
-      {product.warranty}
+      {product.fields.warranty.content.map((section, index) => {
+        return (
+          <React.Fragment key={`warranty-${index}`}>
+            {documentToReactComponents(section as Document)}
+          </React.Fragment>
+        );
+      })}
     </div>
   );
 };
@@ -77,11 +92,13 @@ export default Product;
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const productSlug = String(params?.slug);
 
-  const product = await prisma.product.findUnique({
-    where: { slug: productSlug },
+  const products = await client.getEntries({
+    content_type: "product",
+    "fields.slug[match]": productSlug,
+    limit: 1,
   });
 
   return {
-    props: { product },
+    props: { product: products.items[0] || null },
   };
 };

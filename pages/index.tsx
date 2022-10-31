@@ -1,13 +1,11 @@
-import { Category } from "@prisma/client";
 import type { GetServerSideProps, NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
-import prisma from "../lib/prismadb";
+import { TypeCategory } from "../common/content-types";
+import client from "../lib/contentful";
 
-const Home: NextPage<{
-  categories: Category[];
-}> = ({ categories }) => {
+const Home: NextPage<{ categories: TypeCategory[] }> = ({ categories }) => {
   const { data: session } = useSession();
   return (
     <div>
@@ -20,8 +18,8 @@ const Home: NextPage<{
       <main>
         <h1>Main</h1>
         <hr />
-        {categories.map((category) => (
-          <div key={category.id}>
+        {categories.map(({ fields: category }) => (
+          <div key={category.slug}>
             <Link href={`/category/${category.slug}`}>
               <a>{category.name}</a>
             </Link>
@@ -51,9 +49,9 @@ const Home: NextPage<{
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const categories = await prisma.category.findMany();
+export const getServerSideProps: GetServerSideProps = async () => {
+  const categories = await client.getEntries({ content_type: "category" });
   return {
-    props: { categories },
+    props: { categories: categories.items },
   };
 };
