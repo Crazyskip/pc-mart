@@ -29,32 +29,34 @@ const Category: NextPage<{
     <div>
       <h1>{category.name}</h1>
       <hr />
-      {subCategories.map(({ fields: subCategory }) => (
-        <div
-          key={subCategory.slug}
-          style={{
-            border: "1px solid white",
-            margin: "5px",
-            width: "227px",
-          }}
-        >
-          <Link href={`/category/${category.slug}/${subCategory.slug}`}>
-            <a>
-              <Image
-                src={`https:${subCategory.products[0].fields.images[0].fields.file.url}`}
-                height="225"
-                width="225"
-                alt={subCategory.products[0].fields.images[0].fields.title}
-              />
-            </a>
-          </Link>
-          <Link href={`/category/${category.slug}/${subCategory.slug}`}>
-            <a style={{ display: "block", padding: "10px" }}>
-              <h3>{subCategory.name}</h3>
-            </a>
-          </Link>
-        </div>
-      ))}
+      <div style={{ display: "flex" }}>
+        {subCategories.map(({ fields: subCategory }) => (
+          <div
+            key={subCategory.slug}
+            style={{
+              border: "1px solid white",
+              margin: "5px",
+              width: "227px",
+            }}
+          >
+            <Link href={`/category/${category.slug}/${subCategory.slug}`}>
+              <a>
+                <Image
+                  src={`https:${subCategory.products[0].fields.images[0].fields.file.url}`}
+                  height="225"
+                  width="225"
+                  alt={subCategory.products[0].fields.images[0].fields.title}
+                />
+              </a>
+            </Link>
+            <Link href={`/category/${category.slug}/${subCategory.slug}`}>
+              <a style={{ display: "block", padding: "10px" }}>
+                <h3>{subCategory.name}</h3>
+              </a>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

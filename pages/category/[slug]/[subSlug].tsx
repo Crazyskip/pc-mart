@@ -15,9 +15,6 @@ const SubCategory: NextPage<{
     return <div>Category Not Found</div>;
   }
 
-  console.log(subCategory);
-  console.log(products);
-
   return (
     <div>
       <h1>{subCategory.name}</h1>
@@ -38,12 +35,14 @@ const SubCategory: NextPage<{
                 />
               </a>
             </Link>
-            <Link href={`/products/${product.slug}`}>
-              <a>
-                <h3>{product.name}</h3>
-              </a>
-            </Link>
-            <h4>${product.price}</h4>
+            <div style={{ display: "block", padding: "0 10px" }}>
+              <Link href={`/products/${product.slug}`}>
+                <a>
+                  <h3>{product.name}</h3>
+                </a>
+              </Link>
+              <h4>${product.price}</h4>
+            </div>
           </div>
         ))}
       </div>

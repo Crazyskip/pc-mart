@@ -30,7 +30,7 @@ const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
   };
 
   return (
-    <div style={{ margin: "0 10px" }}>
+    <div style={{ margin: "0 auto", width: "60%", maxWidth: "1200px" }}>
       <h1>{product.fields.name}</h1>
       <div
         style={{
@@ -55,34 +55,35 @@ const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
         </div>
         <h1>${product.fields.price}</h1>
       </div>
+      <div style={{ maxWidth: "calc(100% - 400px)" }}>
+        <h2>Overview</h2>
+        <hr />
+        {product.fields.overview.content.map((section, index) => {
+          return (
+            <React.Fragment key={`overview-${index}`}>
+              {documentToReactComponents(section as Document, options)}
+            </React.Fragment>
+          );
+        })}
 
-      <h2>Overview</h2>
-      <hr />
-      {product.fields.overview.content.map((section, index) => {
-        return (
-          <React.Fragment key={`overview-${index}`}>
-            {documentToReactComponents(section as Document, options)}
-          </React.Fragment>
-        );
-      })}
+        {product.fields.specifications.content.map((section, index) => {
+          return (
+            <React.Fragment key={`specification-${index}`}>
+              {documentToReactComponents(section as Document)}
+            </React.Fragment>
+          );
+        })}
 
-      {product.fields.specifications.content.map((section, index) => {
-        return (
-          <React.Fragment key={`specification-${index}`}>
-            {documentToReactComponents(section as Document)}
-          </React.Fragment>
-        );
-      })}
-
-      <h2>Warranty</h2>
-      <hr />
-      {product.fields.warranty.content.map((section, index) => {
-        return (
-          <React.Fragment key={`warranty-${index}`}>
-            {documentToReactComponents(section as Document)}
-          </React.Fragment>
-        );
-      })}
+        <h2>Warranty</h2>
+        <hr />
+        {product.fields.warranty.content.map((section, index) => {
+          return (
+            <React.Fragment key={`warranty-${index}`}>
+              {documentToReactComponents(section as Document)}
+            </React.Fragment>
+          );
+        })}
+      </div>
     </div>
   );
 };
