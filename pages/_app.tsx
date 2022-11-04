@@ -2,7 +2,6 @@ import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
 import type { AppProps } from "next/app";
-import NavMenu from "../components/nav-menu/NavMenu.component";
 import Header from "../components/header/Header.component";
 import AppContainer from "../components/app-container/AppContainer.component";
 

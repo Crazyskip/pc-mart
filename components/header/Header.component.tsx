@@ -25,31 +25,21 @@ const Header = () => {
         <MainNav>
           <NavLeft>
             <li>
-              <Link href="/">
-                <a>New Products</a>
-              </Link>
+              <Link href="/">New Products</Link>
             </li>
             <li>
-              <Link href="/">
-                <a>Bundles</a>
-              </Link>
+              <Link href="/">Bundles</Link>
             </li>
             <li>
-              <Link href="/">
-                <a>Sale</a>
-              </Link>
+              <Link href="/">Sale</Link>
             </li>
           </NavLeft>
           <NavRight>
             <li>
-              <Link href="/">
-                <a>Wishlist</a>
-              </Link>
+              <Link href="/">Wishlist</Link>
             </li>
             <li>
-              <Link href="/">
-                <a>Login</a>
-              </Link>
+              <Link href="/">Login</Link>
             </li>
           </NavRight>
         </MainNav>

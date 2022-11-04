@@ -6,19 +6,13 @@ const NavMenu = () => {
     <NavMenuContainer>
       <ul>
         <li>
-          <Link href="/">
-            <a>CPUs</a>
-          </Link>
+          <Link href="/">CPUs</Link>
         </li>
         <li>
-          <Link href="/">
-            <a>Graphics Cards</a>
-          </Link>
+          <Link href="/">Graphics Cards</Link>
         </li>
         <li>
-          <Link href="/">
-            <a>Power Supplies</a>
-          </Link>
+          <Link href="/">Power Supplies</Link>
         </li>
       </ul>
     </NavMenuContainer>

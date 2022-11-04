@@ -28,9 +28,7 @@ const Home: NextPage<{ categories: TypeCategory[] }> = ({ categories }) => {
           <hr />
           {categories.map(({ fields: category }) => (
             <div key={category.slug}>
-              <Link href={`/category/${category.slug}`}>
-                <a>{category.name}</a>
-              </Link>
+              <Link href={`/category/${category.slug}`}>{category.name}</Link>
             </div>
           ))}
           <hr />

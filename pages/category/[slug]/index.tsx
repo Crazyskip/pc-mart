@@ -40,16 +40,17 @@ const Category: NextPage<{
             }}
           >
             <Link href={`/category/${category.slug}/${subCategory.slug}`}>
-              <a>
-                <Image
-                  src={`https:${subCategory.products[0].fields.images[0].fields.file.url}`}
-                  height="225"
-                  width="225"
-                  alt={subCategory.products[0].fields.images[0].fields.title}
-                />
-              </a>
+              <Image
+                src={`https:${subCategory.products[0].fields.images[0].fields.file.url}`}
+                height="225"
+                width="225"
+                alt={subCategory.products[0].fields.images[0].fields.title}
+              />
             </Link>
-            <Link href={`/category/${category.slug}/${subCategory.slug}`}>
+            <Link
+              href={`/category/${category.slug}/${subCategory.slug}`}
+              legacyBehavior
+            >
               <a style={{ display: "block", padding: "10px" }}>
                 <h3>{subCategory.name}</h3>
               </a>

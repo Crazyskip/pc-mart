@@ -26,20 +26,16 @@ const SubCategory: NextPage<{
             style={{ border: "1px solid white", margin: "5px", width: "227px" }}
           >
             <Link href={`/products/${product.slug}`}>
-              <a>
-                <Image
-                  src={`https:${product.images[0].fields.file.url}`}
-                  height="225"
-                  width="225"
-                  alt={product.images[0].fields.title}
-                />
-              </a>
+              <Image
+                src={`https:${product.images[0].fields.file.url}`}
+                height="225"
+                width="225"
+                alt={product.images[0].fields.title}
+              />
             </Link>
             <div style={{ display: "block", padding: "0 10px" }}>
               <Link href={`/products/${product.slug}`}>
-                <a>
-                  <h3>{product.name}</h3>
-                </a>
+                <h3>{product.name}</h3>
               </Link>
               <h4>${product.price}</h4>
             </div>
