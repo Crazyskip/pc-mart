@@ -14,45 +14,36 @@ const MainContainer = styled.main`
 const Home: NextPage<{ categories: TypeCategory[] }> = ({ categories }) => {
   const { data: session } = useSession();
   return (
-    <div>
+    <>
       <Head>
         <title>PC Mart</title>
         <meta name="description" content="Pc part shop" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <MainContainer>
-        <NavMenu></NavMenu>
-        <div style={{ width: "calc(100% - 209px)", padding: "10px 15px" }}>
-          <h1>Home</h1>
-          <hr />
-          {categories.map(({ fields: category }) => (
-            <div key={category.slug}>
-              <Link href={`/category/${category.slug}`}>{category.name}</Link>
-            </div>
-          ))}
-          <hr />
-          {session ? (
-            <>
-              Signed in as {session.user?.email} <br />
-              <button onClick={() => signOut()}>Sign out</button>
-            </>
-          ) : (
-            <>
-              Not signed in <br />
-              <button onClick={() => signIn()}>Sign in</button>
-            </>
-          )}
-          <div>
-            <Link href="/admin">Admin</Link>
-          </div>
+      <h1>Home</h1>
+      <hr />
+      {categories.map(({ fields: category }) => (
+        <div key={category.slug}>
+          <Link href={`/category/${category.slug}`}>{category.name}</Link>
         </div>
-      </MainContainer>
-
-      <footer>
-        <p>Footer</p>
-      </footer>
-    </div>
+      ))}
+      <hr />
+      {session ? (
+        <>
+          Signed in as {session.user?.email} <br />
+          <button onClick={() => signOut()}>Sign out</button>
+        </>
+      ) : (
+        <>
+          Not signed in <br />
+          <button onClick={() => signIn()}>Sign in</button>
+        </>
+      )}
+      <div>
+        <Link href="/admin">Admin</Link>
+      </div>
+    </>
   );
 };
 

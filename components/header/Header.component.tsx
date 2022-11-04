@@ -16,7 +16,9 @@ const Header = () => {
   return (
     <HeaderContainer>
       <TopHeader>
-        <Logo>PC Mart</Logo>
+        <Link href="/">
+          <Logo>PC Mart</Logo>
+        </Link>
         <SearchBarPlaceholder>Search...</SearchBarPlaceholder>
         <CartPlaceholder>0 Items | $0</CartPlaceholder>
       </TopHeader>
@@ -25,7 +27,7 @@ const Header = () => {
         <MainNav>
           <NavLeft>
             <li>
-              <Link href="/">New Products</Link>
+              <Link href="/new-products">New Products</Link>
             </li>
             <li>
               <Link href="/">Bundles</Link>

@@ -1,19 +1,23 @@
 import Link from "next/link";
 import { NavMenuContainer } from "./NavMenu.styles";
 
+const categories = [
+  { name: "CPUs", slug: "cpus" },
+  { name: "Graphics Cards", slug: "graphics-cards" },
+  { name: "Power Supplies", slug: "power-supplies" },
+];
+
 const NavMenu = () => {
   return (
     <NavMenuContainer>
       <ul>
-        <li>
-          <Link href="/">CPUs</Link>
-        </li>
-        <li>
-          <Link href="/">Graphics Cards</Link>
-        </li>
-        <li>
-          <Link href="/">Power Supplies</Link>
-        </li>
+        {categories.map((category) => (
+          <li key={category.slug}>
+            <Link href={`/category/${category.slug}`} replace>
+              {category.name}
+            </Link>
+          </li>
+        ))}
       </ul>
     </NavMenuContainer>
   );
