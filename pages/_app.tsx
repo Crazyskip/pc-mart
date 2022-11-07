@@ -6,6 +6,8 @@ import Header from "../components/header/Header.component";
 import AppContainer from "../components/app-container/AppContainer.component";
 import NavMenu from "../components/nav-menu/NavMenu.component";
 import styled from "styled-components";
+import { Provider } from "react-redux";
+import { store } from "../store/store";
 
 const MainContainer = styled.main`
   display: flex;
@@ -23,16 +25,18 @@ export default function App({
   session: Session;
 }>) {
   return (
-    <SessionProvider session={session}>
-      <AppContainer>
-        <Header />
-        <MainContainer>
-          <NavMenu />
-          <ContentContainer>
-            <Component {...pageProps} />
-          </ContentContainer>
-        </MainContainer>
-      </AppContainer>
-    </SessionProvider>
+    <Provider store={store}>
+      <SessionProvider session={session}>
+        <AppContainer>
+          <Header />
+          <MainContainer>
+            <NavMenu />
+            <ContentContainer>
+              <Component {...pageProps} />
+            </ContentContainer>
+          </MainContainer>
+        </AppContainer>
+      </SessionProvider>
+    </Provider>
   );
 }

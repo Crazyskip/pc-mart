@@ -5,8 +5,12 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS, Document, Node } from "@contentful/rich-text-types";
 import React from "react";
 import { TypeProduct } from "../../common/content-types";
+import { useAppDispatch } from "../../store/hooks";
+import { addItem } from "../../store/slices/cartSlice";
 
 const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
+  const dispatch = useAppDispatch();
+
   if (product === null) {
     return <div>Product Not Found</div>;
   }
@@ -18,7 +22,7 @@ const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
         return (
           <Image
             src={`https:${file.url}`}
-            layout="responsive"
+            style={{ width: "100%", height: "auto" }}
             height={file.details.image.height}
             width={file.details.image.width}
             alt={title}
@@ -30,7 +34,7 @@ const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
   };
 
   return (
-    <div style={{ margin: "0 auto", width: "60%", maxWidth: "1200px" }}>
+    <div style={{ margin: "0 auto", maxWidth: "1200px" }}>
       <h1>{product.fields.name}</h1>
       <div
         style={{
@@ -54,8 +58,20 @@ const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
           />
         </div>
         <h1>${product.fields.price}</h1>
+        <button
+          onClick={() =>
+            dispatch(
+              addItem({
+                ...product.fields,
+                quantity: 1,
+              })
+            )
+          }
+        >
+          Add to Cart
+        </button>
       </div>
-      <div style={{ maxWidth: "calc(100% - 400px)" }}>
+      <div style={{ maxWidth: "calc(100% - 500px)" }}>
         <h2>Overview</h2>
         <hr />
         {product.fields.overview.content.map((section, index) => {
