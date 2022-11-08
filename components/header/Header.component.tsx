@@ -11,10 +11,13 @@ import {
   SearchBarPlaceholder,
   TopHeader,
 } from "./Header.styles";
-import { useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useEffect } from "react";
+import { hydrate } from "../../store/slices/cartSlice";
 
 const Header = () => {
   const cart = useAppSelector((state) => state.cart.items);
+  const dispatch = useAppDispatch();
 
   const cartValue = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -23,7 +26,12 @@ const Header = () => {
 
   const cartItemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  console.log(cart);
+  useEffect(() => {
+    const cartString = localStorage.getItem("cart");
+    if (cartString) {
+      dispatch(hydrate(JSON.parse(cartString)));
+    }
+  }, [dispatch]);
 
   return (
     <HeaderContainer>

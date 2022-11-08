@@ -8,6 +8,7 @@ import NavMenu from "../components/nav-menu/NavMenu.component";
 import styled from "styled-components";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
+import React from "react";
 
 const MainContainer = styled.main`
   display: flex;
@@ -17,6 +18,8 @@ const ContentContainer = styled.div`
   width: calc(100% - 209px);
   padding: 10px 15px;
 `;
+
+const HeaderMemo = React.memo(Header);
 
 export default function App({
   Component,
@@ -28,7 +31,7 @@ export default function App({
     <Provider store={store}>
       <SessionProvider session={session}>
         <AppContainer>
-          <Header />
+          <HeaderMemo />
           <MainContainer>
             <NavMenu />
             <ContentContainer>
