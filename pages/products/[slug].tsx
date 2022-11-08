@@ -6,7 +6,7 @@ import { BLOCKS, Document, Node } from "@contentful/rich-text-types";
 import React from "react";
 import { TypeProduct } from "../../common/content-types";
 import { useAppDispatch } from "../../store/hooks";
-import { addItem } from "../../store/slices/cartSlice";
+import { addToCart } from "../../store/slices/cartSlice";
 
 const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
   const dispatch = useAppDispatch();
@@ -61,9 +61,8 @@ const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
         <button
           onClick={() =>
             dispatch(
-              addItem({
+              addToCart({
                 ...product.fields,
-                quantity: 1,
               })
             )
           }

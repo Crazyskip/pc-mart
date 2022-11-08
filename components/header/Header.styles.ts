@@ -37,7 +37,8 @@ export const SearchBarPlaceholder = styled.div`
   }
 `;
 
-export const CartPlaceholder = styled.div`
+export const CartPlaceholder = styled.a`
+  display: inline-block;
   min-height: 35px;
   order: 2;
 `;

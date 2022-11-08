@@ -11,13 +11,17 @@ import {
   SearchBarPlaceholder,
   TopHeader,
 } from "./Header.styles";
-import { useAppSelector, useAppDispatch } from "../../store/hooks";
+import { useAppSelector } from "../../store/hooks";
 
 const Header = () => {
   const cart = useAppSelector((state) => state.cart.items);
-  const dispatch = useAppDispatch();
 
-  const cartValue = cart.reduce((acc, item) => acc + item.price, 0);
+  const cartValue = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  const cartItemCount = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   console.log(cart);
 
@@ -28,9 +32,11 @@ const Header = () => {
           <Logo>PC Mart</Logo>
         </Link>
         <SearchBarPlaceholder>Search...</SearchBarPlaceholder>
-        <CartPlaceholder>
-          {cart.length} Items | ${cartValue}
-        </CartPlaceholder>
+        <Link href="/cart" passHref legacyBehavior>
+          <CartPlaceholder>
+            {cartItemCount} Items | ${cartValue}
+          </CartPlaceholder>
+        </Link>
       </TopHeader>
       <NavigationContainer>
         <CategoriesContainer>Categories</CategoriesContainer>
