@@ -2,16 +2,14 @@ import type { GetServerSideProps, NextPage } from "next";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Link from "next/link";
-import styled from "styled-components";
 import { TypeCategory } from "../common/content-types";
-import NavMenu from "../components/nav-menu/NavMenu.component";
 import client from "../lib/contentful";
 
-const MainContainer = styled.main`
-  display: flex;
-`;
+interface PageProps {
+  categories: TypeCategory[];
+}
 
-const Home: NextPage<{ categories: TypeCategory[] }> = ({ categories }) => {
+const Home: NextPage<PageProps> = ({ categories }) => {
   const { data: session } = useSession();
   return (
     <>

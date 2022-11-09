@@ -8,7 +8,11 @@ import { TypeProduct } from "../../common/content-types";
 import { useAppDispatch } from "../../store/hooks";
 import { addToCart } from "../../store/slices/cartSlice";
 
-const Product: NextPage<{ product: TypeProduct }> = ({ product }) => {
+interface PageProps {
+  product: TypeProduct;
+}
+
+const Product: NextPage<PageProps> = ({ product }) => {
   const dispatch = useAppDispatch();
 
   if (product === null) {

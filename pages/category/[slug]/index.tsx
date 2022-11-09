@@ -17,10 +17,12 @@ interface TypeSubCategoryWithProducts extends TypeSubCategory {
   fields: TypeSubCategoryWithProductsFields;
 }
 
-const Category: NextPage<{
+interface PageProps {
   category: TypeCategoryFields;
   subCategories: TypeSubCategoryWithProducts[];
-}> = ({ category, subCategories }) => {
+}
+
+const Category: NextPage<PageProps> = ({ category, subCategories }) => {
   if (category === null) {
     return <div>Category Not Found</div>;
   }

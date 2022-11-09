@@ -1,16 +1,17 @@
 import type { GetServerSideProps, NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import {
   TypeProduct,
   TypeSubCategoryFields,
 } from "../../../common/content-types";
+import Product from "../../../components/product/Product";
 import client from "../../../lib/contentful";
 
-const SubCategory: NextPage<{
+interface PageProps {
   subCategory: TypeSubCategoryFields;
   products: TypeProduct[];
-}> = ({ subCategory, products }) => {
+}
+
+const SubCategory: NextPage<PageProps> = ({ subCategory, products }) => {
   if (subCategory === null) {
     return <div>Category Not Found</div>;
   }
@@ -19,27 +20,9 @@ const SubCategory: NextPage<{
     <div>
       <h1>{subCategory.name}</h1>
       <hr />
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
         {products.map(({ fields: product }) => (
-          <div
-            key={product.slug}
-            style={{ border: "1px solid white", margin: "5px", width: "227px" }}
-          >
-            <Link href={`/products/${product.slug}`}>
-              <Image
-                src={`https:${product.images[0].fields.file.url}`}
-                height="225"
-                width="225"
-                alt={product.images[0].fields.title}
-              />
-            </Link>
-            <div style={{ display: "block", padding: "0 10px" }}>
-              <Link href={`/products/${product.slug}`}>
-                <h3>{product.name}</h3>
-              </Link>
-              <h4>${product.price}</h4>
-            </div>
-          </div>
+          <Product key={product.slug} product={product} />
         ))}
       </div>
     </div>

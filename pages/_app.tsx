@@ -9,6 +9,9 @@ import styled from "styled-components";
 import { Provider } from "react-redux";
 import { store } from "../store/store";
 import React from "react";
+import { Open_Sans } from "@next/font/google";
+
+const openSans = Open_Sans();
 
 const MainContainer = styled.main`
   display: flex;
@@ -30,6 +33,11 @@ export default function App({
   return (
     <Provider store={store}>
       <SessionProvider session={session}>
+        <style jsx global>{`
+          html {
+            font-family: ${openSans.style.fontFamily};
+          }
+        `}</style>
         <AppContainer>
           <HeaderMemo />
           <MainContainer>
