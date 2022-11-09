@@ -1,12 +1,10 @@
 import type { GetServerSideProps, NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { TypeProduct } from "../common/content-types";
+import { TypeProductFields } from "../common/content-types";
 import Product from "../components/product/Product";
 import client from "../lib/contentful";
 
 interface PageProps {
-  products: TypeProduct[];
+  products: TypeProductFields[];
 }
 
 const NewProducts: NextPage<PageProps> = ({ products }) => {
@@ -15,7 +13,7 @@ const NewProducts: NextPage<PageProps> = ({ products }) => {
       <h1>New Products</h1>
       <hr />
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {products.map(({ fields: product }) => (
+        {products.map((product) => (
           <Product key={product.slug} product={product} />
         ))}
       </div>
@@ -25,14 +23,23 @@ const NewProducts: NextPage<PageProps> = ({ products }) => {
 
 export default NewProducts;
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const products = await client.getEntries({
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  const productsRes = await client.getEntries({
     content_type: "product",
     order: "-sys.createdAt",
-    limit: 10,
+    limit: 30,
+    select:
+      "fields.name,fields.slug,fields.brand,fields.price,fields.images,fields.description",
   });
 
+  const products = productsRes.items.map((product) => product.fields);
+
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=10, stale-while-revalidate=59"
+  );
+
   return {
-    props: { products: products.items },
+    props: { products: products },
   };
 };

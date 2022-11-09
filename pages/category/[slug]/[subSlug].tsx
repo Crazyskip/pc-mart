@@ -46,6 +46,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     content_type: "product",
     "fields.subCategory.sys.contentType.sys.id": "subCategory",
     "fields.subCategory.fields.slug[match]": subCategorySlug,
+    limit: 30,
+    select:
+      "fields.name,fields.slug,fields.brand,fields.price,fields.images,fields.description",
   });
 
   return {

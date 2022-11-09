@@ -11,7 +11,7 @@ import { store } from "../store/store";
 import React from "react";
 import { Open_Sans } from "@next/font/google";
 
-const openSans = Open_Sans();
+const openSans = Open_Sans({ subsets: ["latin"] });
 
 const MainContainer = styled.main`
   display: flex;

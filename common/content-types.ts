@@ -23,6 +23,7 @@ export interface TypeProductFields {
   price: Contentful.EntryFields.Integer;
   modelNumber: Contentful.EntryFields.Symbol;
   images: Contentful.Asset[];
+  description: Contentful.EntryFields.Text;
   overview: CFRichTextTypes.Block | CFRichTextTypes.Inline;
   specifications: CFRichTextTypes.Block | CFRichTextTypes.Inline;
   warranty: CFRichTextTypes.Block | CFRichTextTypes.Inline;

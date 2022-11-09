@@ -77,6 +77,7 @@ const Product: NextPage<PageProps> = ({ product }) => {
       <div style={{ maxWidth: "calc(100% - 500px)" }}>
         <h2>Overview</h2>
         <hr />
+        {product.fields.description}
         {product.fields.overview.content.map((section, index) => {
           return (
             <React.Fragment key={`overview-${index}`}>

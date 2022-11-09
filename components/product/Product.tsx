@@ -32,12 +32,7 @@ const Product = ({ product }: Props) => {
         <div>
           <Link href={`/products/${product.slug}`}>{product.name}</Link>
         </div>
-        <p>
-          The AMD Ryzen 9 7900X Processor is a 12-core workhorse designed for
-          enthusiast level gamers and content creators. Be prepared to overpower
-          the competition with a base clock speed of 4.7GHz and boost clock up
-          to a blazing 5.6GHz, and 64MB of L3 Cache. Outfit your rig wit…
-        </p>
+        <p>{product.description}</p>
       </ProductDescription>
       <PriceBox>
         <Price>${product.price}</Price>
