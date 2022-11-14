@@ -3,7 +3,7 @@ import {
   TypeProduct,
   TypeSubCategoryFields,
 } from "../../../common/content-types";
-import Product from "../../../components/product/Product";
+import Product from "../../../components/product/Product.component";
 import client from "../../../lib/contentful";
 
 interface PageProps {

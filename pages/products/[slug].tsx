@@ -7,6 +7,7 @@ import React from "react";
 import { TypeProduct } from "../../common/content-types";
 import { useAppDispatch } from "../../store/hooks";
 import { addToCart } from "../../store/slices/cartSlice";
+import ProductTopper from "../../components/product-topper/ProductTopper.component";
 
 interface PageProps {
   product: TypeProduct;
@@ -19,7 +20,7 @@ const Product: NextPage<PageProps> = ({ product }) => {
     return <div>Product Not Found</div>;
   }
 
-  const options = {
+  const overviewOptions = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node: Node) => {
         const { file, title } = node.data.target.fields;
@@ -37,43 +38,14 @@ const Product: NextPage<PageProps> = ({ product }) => {
     },
   };
 
+  const specOptions = {
+    renderText: (text: string) =>
+      text.split("\n").flatMap((text, i) => [i > 0 && <br />, text]),
+  };
+
   return (
-    <div style={{ margin: "0 auto", maxWidth: "1200px" }}>
-      <h1>{product.fields.name}</h1>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <div>
-          <Image
-            src={`https:${product.fields.images[0].fields.file.url}`}
-            height="225"
-            width="225"
-            alt="thumbnail"
-          />
-          <Image
-            src={`https:${product.fields.images[1].fields.file.url}`}
-            height="225"
-            width="225"
-            alt="thumbnail"
-          />
-        </div>
-        <h1>${product.fields.price}</h1>
-        <button
-          onClick={() =>
-            dispatch(
-              addToCart({
-                ...product.fields,
-              })
-            )
-          }
-        >
-          Add to Cart
-        </button>
-      </div>
+    <div style={{ margin: "0 auto" }}>
+      <ProductTopper product={product.fields} />
       <div style={{ maxWidth: "calc(100% - 500px)" }}>
         <h2>Overview</h2>
         <hr />
@@ -81,7 +53,7 @@ const Product: NextPage<PageProps> = ({ product }) => {
         {product.fields.overview.content.map((section, index) => {
           return (
             <React.Fragment key={`overview-${index}`}>
-              {documentToReactComponents(section as Document, options)}
+              {documentToReactComponents(section as Document, overviewOptions)}
             </React.Fragment>
           );
         })}
@@ -89,7 +61,7 @@ const Product: NextPage<PageProps> = ({ product }) => {
         {product.fields.specifications.content.map((section, index) => {
           return (
             <React.Fragment key={`specification-${index}`}>
-              {documentToReactComponents(section as Document)}
+              {documentToReactComponents(section as Document, specOptions)}
             </React.Fragment>
           );
         })}

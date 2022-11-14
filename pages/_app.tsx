@@ -23,13 +23,14 @@ const ContentContainer = styled.div`
 `;
 
 const HeaderMemo = React.memo(Header);
+const NavMenuMemo = React.memo(NavMenu);
 
-export default function App({
+const App = ({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps<{
   session: Session;
-}>) {
+}>) => {
   return (
     <Provider store={store}>
       <SessionProvider session={session}>
@@ -41,7 +42,7 @@ export default function App({
         <AppContainer>
           <HeaderMemo />
           <MainContainer>
-            <NavMenu />
+            <NavMenuMemo />
             <ContentContainer>
               <Component {...pageProps} />
             </ContentContainer>
@@ -50,4 +51,6 @@ export default function App({
       </SessionProvider>
     </Provider>
   );
-}
+};
+
+export default App;
