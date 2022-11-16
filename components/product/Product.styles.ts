@@ -16,7 +16,7 @@ export const ProductDescription = styled.div`
   padding: 0 20px;
 
   a {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: rgb(53, 122, 183);
 

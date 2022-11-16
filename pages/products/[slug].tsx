@@ -6,16 +6,14 @@ import { BLOCKS, Document, Node } from "@contentful/rich-text-types";
 import React from "react";
 import { TypeProduct } from "../../common/content-types";
 import { useAppDispatch } from "../../store/hooks";
-import { addToCart } from "../../store/slices/cartSlice";
 import ProductTopper from "../../components/product-topper/ProductTopper.component";
+import ProductTabs from "../../components/product-tabs/ProductTabs.component";
 
 interface PageProps {
   product: TypeProduct;
 }
 
 const Product: NextPage<PageProps> = ({ product }) => {
-  const dispatch = useAppDispatch();
-
   if (product === null) {
     return <div>Product Not Found</div>;
   }
@@ -46,36 +44,12 @@ const Product: NextPage<PageProps> = ({ product }) => {
   return (
     <div style={{ margin: "0 auto" }}>
       <ProductTopper product={product.fields} />
-      <div style={{ maxWidth: "calc(100% - 500px)" }}>
-        <h2>Overview</h2>
-        <hr />
-        {product.fields.description}
-        {product.fields.overview.content.map((section, index) => {
-          return (
-            <React.Fragment key={`overview-${index}`}>
-              {documentToReactComponents(section as Document, overviewOptions)}
-            </React.Fragment>
-          );
-        })}
-
-        {product.fields.specifications.content.map((section, index) => {
-          return (
-            <React.Fragment key={`specification-${index}`}>
-              {documentToReactComponents(section as Document, specOptions)}
-            </React.Fragment>
-          );
-        })}
-
-        <h2>Warranty</h2>
-        <hr />
-        {product.fields.warranty.content.map((section, index) => {
-          return (
-            <React.Fragment key={`warranty-${index}`}>
-              {documentToReactComponents(section as Document)}
-            </React.Fragment>
-          );
-        })}
-      </div>
+      <ProductTabs
+        description={product.fields.description}
+        overview={product.fields.overview}
+        specifications={product.fields.specifications}
+        warranty={product.fields.warranty}
+      />
     </div>
   );
 };
