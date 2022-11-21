@@ -15,6 +15,14 @@ export interface TypeCategoryFields {
 
 export type TypeCategory = Contentful.Entry<TypeCategoryFields>;
 
+export interface TypeHomeProductFields {
+  title: Contentful.EntryFields.Symbol;
+  subTitle: Contentful.EntryFields.Symbol;
+  product: Contentful.Entry<TypeProductFields>;
+}
+
+export type TypeHomeProduct = Contentful.Entry<TypeHomeProductFields>;
+
 export interface TypeProductFields {
   name: Contentful.EntryFields.Symbol;
   slug: Contentful.EntryFields.Symbol;

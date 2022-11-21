@@ -8,6 +8,7 @@ const categories = [
   { name: "Graphics Cards", slug: "graphics-cards" },
   { name: "Hard Drives & SSDs", slug: "hard-drives-and-ssds" },
   { name: "Memory", slug: "memory" },
+  { name: "Monitors", slug: "monitors" },
   { name: "Motherboards", slug: "motherboards" },
   { name: "Power Supplies", slug: "power-supplies" },
 ];
