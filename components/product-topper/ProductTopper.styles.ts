@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ImageSelectorProps {
+  count: number;
+}
+
 export const Title = styled.h1`
   font-weight: 700;
   font-size: 1.8rem;
@@ -21,6 +25,15 @@ export const Model = styled.span`
   }
 `;
 
+export const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Thumbnail = styled.div`
+  cursor: pointer;
+`;
+
 export const ImageSlider = styled.div`
   display: flex;
   margin: 25px 0;
@@ -28,7 +41,26 @@ export const ImageSlider = styled.div`
   max-width: 78%;
 
   img {
-    margin-right: 5px;
+    margin-right: 2px;
+  }
+`;
+
+export const ImageSelector = styled.div<ImageSelectorProps>`
+  display: flex;
+  width: 352px;
+  height: 105px;
+  overflow-x: ${({ count }) => (count > 4 ? "scroll" : "auto")};
+`;
+
+export const SelectImage = styled.div`
+  width: 84px;
+  height: 84px;
+  margin: 0 2px;
+  cursor: pointer;
+  border-radius: 4%;
+
+  img {
+    border-radius: 4%;
   }
 `;
 

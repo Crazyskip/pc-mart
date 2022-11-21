@@ -10,6 +10,9 @@ import { Provider } from "react-redux";
 import { store } from "../store/store";
 import React from "react";
 import { Open_Sans } from "@next/font/google";
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 

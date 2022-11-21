@@ -36,7 +36,7 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const featuredProducts = await client.getEntries({
-    content_type: "homeProduct",
+    content_type: "featuredProduct",
     select: "fields",
   });
 

@@ -7,10 +7,13 @@ const categories = [
   { name: "CPUs", slug: "cpus" },
   { name: "Graphics Cards", slug: "graphics-cards" },
   { name: "Hard Drives & SSDs", slug: "hard-drives-and-ssds" },
+  { name: "Keyboards", slug: "keyboards" },
   { name: "Memory", slug: "memory" },
+  { name: "Mice", slug: "mice" },
   { name: "Monitors", slug: "monitors" },
   { name: "Motherboards", slug: "motherboards" },
   { name: "Power Supplies", slug: "power-supplies" },
+  { name: "Speakers", slug: "speakers" },
 ];
 
 const NavMenu = () => {

@@ -42,6 +42,7 @@ const ProductTabs = ({
             width={file.details.image.width}
             alt={title}
             priority
+            quality="100"
           />
         );
       },
@@ -50,7 +51,9 @@ const ProductTabs = ({
 
   const specOptions = {
     renderText: (text: string) =>
-      text.split("\n").flatMap((text, i) => [i > 0 && <br />, text]),
+      text
+        .split("\n")
+        .flatMap((text, i) => [i > 0 && <br key={text + i} />, text]),
   };
 
   const tabs = [
