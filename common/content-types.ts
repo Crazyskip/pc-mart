@@ -46,3 +46,12 @@ export interface TypeSubCategoryFields {
 }
 
 export type TypeSubCategory = Contentful.Entry<TypeSubCategoryFields>;
+
+export interface TypeSubCategoryWithProductsFields
+  extends TypeSubCategoryFields {
+  products: TypeProduct[];
+}
+
+export interface TypeSubCategoryWithProducts extends TypeSubCategory {
+  fields: TypeSubCategoryWithProductsFields;
+}

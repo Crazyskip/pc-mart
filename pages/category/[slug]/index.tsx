@@ -1,26 +1,21 @@
 import type { GetServerSideProps, NextPage } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import styled from "styled-components";
 import {
   TypeCategoryFields,
-  TypeProduct,
-  TypeSubCategory,
-  TypeSubCategoryFields,
+  TypeSubCategoryWithProducts,
 } from "../../../common/content-types";
+import SubCategory from "../../../components/sub-category/SubCategory.component";
 import client from "../../../lib/contentful";
-
-interface TypeSubCategoryWithProductsFields extends TypeSubCategoryFields {
-  products: TypeProduct[];
-}
-
-interface TypeSubCategoryWithProducts extends TypeSubCategory {
-  fields: TypeSubCategoryWithProductsFields;
-}
 
 interface PageProps {
   category: TypeCategoryFields;
   subCategories: TypeSubCategoryWithProducts[];
 }
+
+const SubCategoriesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`;
 
 const Category: NextPage<PageProps> = ({ category, subCategories }) => {
   if (category === null) {
@@ -31,35 +26,11 @@ const Category: NextPage<PageProps> = ({ category, subCategories }) => {
     <div>
       <h1>{category.name}</h1>
       <hr />
-      <div style={{ display: "flex" }}>
+      <SubCategoriesContainer>
         {subCategories.map(({ fields: subCategory }) => (
-          <div
-            key={subCategory.slug}
-            style={{
-              border: "1px solid white",
-              margin: "5px",
-              width: "227px",
-            }}
-          >
-            <Link href={`/category/${category.slug}/${subCategory.slug}`}>
-              <Image
-                src={`https:${subCategory.products[0].fields.images[0].fields.file.url}`}
-                height="225"
-                width="225"
-                alt={subCategory.products[0].fields.images[0].fields.title}
-              />
-            </Link>
-            <Link
-              href={`/category/${category.slug}/${subCategory.slug}`}
-              legacyBehavior
-            >
-              <a style={{ display: "block", padding: "10px" }}>
-                <h3>{subCategory.name}</h3>
-              </a>
-            </Link>
-          </div>
+          <SubCategory key={subCategory.slug} subCategory={subCategory} />
         ))}
-      </div>
+      </SubCategoriesContainer>
     </div>
   );
 };
