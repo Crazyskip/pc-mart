@@ -19,28 +19,79 @@ export const Logo = styled.h1`
   line-height: 30px;
 `;
 
-export const SearchBarPlaceholder = styled.div`
+export const SearchForm = styled.form`
+  display: flex;
   width: 100%;
-  background-color: rgb(235, 235, 235);
-  min-height: 35px;
   order: 3;
   margin: 8px 0px;
 
-  color: rgb(130, 130, 130);
-  line-height: 35px;
-  padding: 0 10px;
-  border-radius: 5px;
-
   @media (${device.large}) {
-    width: 40%;
+    width: 50%;
     order: 2;
   }
 `;
 
-export const CartPlaceholder = styled.a`
-  display: inline-block;
+export const SearchBar = styled.input`
+  width: 100%;
+  background-color: rgb(235, 235, 235);
   min-height: 35px;
+  color: rgb(90, 90, 90);
+  line-height: 35px;
+  padding: 0 10px;
+  border: none;
+  font-size: 1rem;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const SearchButton = styled.button`
+  background-color: rgb(53, 122, 183);
+  min-height: 35px;
+  width: 45px;
+  border: none;
+  cursor: pointer;
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+`;
+
+export const CartContainer = styled.div`
+  display: flex;
   order: 2;
+
+  svg {
+    &:hover {
+      color: rgb(84, 145, 220);
+    }
+  }
+`;
+
+export const Details = styled.div`
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: right;
+  padding-right: 10px;
+  letter-spacing: 0.3px;
+
+  a {
+    display: block;
+    margin-bottom: 2px;
+
+    &:hover {
+      color: rgb(84, 145, 220);
+    }
+  }
+
+  a:nth-child(2) {
+    color: rgb(84, 145, 220);
+
+    &:hover {
+      color: rgb(53, 122, 183);
+    }
+  }
 `;
 
 export const NavigationContainer = styled.div`
