@@ -1,6 +1,21 @@
 import * as CFRichTextTypes from "@contentful/rich-text-types";
 import * as Contentful from "contentful";
 
+// Self added types
+export interface TypeSubCategoryWithProductsFields
+  extends TypeSubCategoryFields {
+  products: TypeProduct[];
+}
+
+export interface TypeSubCategoryWithProducts extends TypeSubCategory {
+  fields: TypeSubCategoryWithProductsFields;
+}
+
+export interface Product extends TypeProductFields {
+  quantity: number;
+}
+
+// Generated Types
 export interface TypeBrandFields {
   name: Contentful.EntryFields.Symbol;
   slug: Contentful.EntryFields.Symbol;
@@ -46,12 +61,3 @@ export interface TypeSubCategoryFields {
 }
 
 export type TypeSubCategory = Contentful.Entry<TypeSubCategoryFields>;
-
-export interface TypeSubCategoryWithProductsFields
-  extends TypeSubCategoryFields {
-  products: TypeProduct[];
-}
-
-export interface TypeSubCategoryWithProducts extends TypeSubCategory {
-  fields: TypeSubCategoryWithProductsFields;
-}

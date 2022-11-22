@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../common/breakpoints";
 
 export const FeaturedContainer = styled.div`
   display: flex;
@@ -6,12 +7,44 @@ export const FeaturedContainer = styled.div`
 `;
 
 export const ProductContainer = styled.div`
-  width: calc(20% - 6px);
+  width: calc(50% - 6px);
   margin: 3px;
   position: relative;
 
   &:hover {
     color: rgb(84, 145, 220);
+  }
+
+  &:nth-of-type(1n + 9) {
+    display: none;
+  }
+
+  @media (${device.medium}) {
+    width: calc(33.33333% - 6px);
+
+    &:nth-of-type(1n + 9) {
+      display: block;
+    }
+
+    &:nth-of-type(1n + 10) {
+      display: none;
+    }
+  }
+
+  @media (${device.large}) {
+    width: calc(25% - 6px);
+
+    &:nth-of-type(1n + 9) {
+      display: none;
+    }
+  }
+
+  @media (${device.xLarge}) {
+    width: calc(20% - 6px);
+
+    &:nth-of-type(1n + 9) {
+      display: block;
+    }
   }
 `;
 

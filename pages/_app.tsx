@@ -22,7 +22,7 @@ const MainContainer = styled.main`
 
 const ContentContainer = styled.div`
   width: calc(100% - 209px);
-  padding: 10px 15px;
+  padding: 10px 8px;
 `;
 
 const HeaderMemo = React.memo(Header);

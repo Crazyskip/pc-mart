@@ -4,7 +4,7 @@ export const ProductContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 12px 0;
+  padding: 12px 5px;
   border-bottom: 1px solid rgba(115, 133, 145, 0.2);
 `;
 
