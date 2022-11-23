@@ -50,6 +50,7 @@ export const AddToCart = styled.button`
   display: block;
   color: #fff;
   width: 100%;
+  height: 39px;
   padding: 12px;
   margin-bottom: 2px;
   font-weight: 700;
@@ -60,8 +61,16 @@ export const AddToCart = styled.button`
   border: none;
   background: linear-gradient(rgb(111, 210, 28) 0px, rgb(98, 183, 27) 100%);
 
+  &:disabled {
+    outline: none;
+  }
+
   &:hover {
     background: linear-gradient(rgb(130, 229, 28) 0px, rgb(111, 210, 28) 100%);
+  }
+
+  svg {
+    margin-right: 3px;
   }
 `;
 

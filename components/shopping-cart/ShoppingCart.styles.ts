@@ -41,8 +41,8 @@ export const ProductCell = styled.td`
   padding: 10px 0;
 
   a {
-    padding-right: 35px;
-    padding-left: 25px;
+    padding-right: 25px;
+    padding-left: 10px;
     font-weight: 700;
     color: rgb(53, 122, 183);
 

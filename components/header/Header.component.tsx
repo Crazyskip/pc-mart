@@ -20,12 +20,14 @@ import { hydrate } from "../../store/slices/cartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 const Header = () => {
   const [searchInput, setSearchInput] = useState("");
   const cart = useAppSelector((state) => state.cart.items);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { data: session } = useSession();
 
   const cartValue = cart.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -104,8 +106,17 @@ const Header = () => {
             <li>
               <Link href="/">Wishlist</Link>
             </li>
+            {session ? (
+              <li>
+                <Link href="/">Profile</Link>
+              </li>
+            ) : null}
             <li>
-              <Link href="/">Login</Link>
+              {session ? (
+                <div onClick={() => signOut()}>Logout</div>
+              ) : (
+                <div onClick={() => signIn()}>Login</div>
+              )}
             </li>
           </NavRight>
         </MainNav>

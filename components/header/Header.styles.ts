@@ -154,9 +154,11 @@ export const NavRight = styled.ul`
   li {
     border-left: 1px solid rgba(160, 174, 223, 0.34);
 
-    a {
+    a,
+    div {
       display: inline-block;
       padding: 0 20px;
+      cursor: pointer;
 
       &:hover {
         background-color: rgb(9, 44, 72);

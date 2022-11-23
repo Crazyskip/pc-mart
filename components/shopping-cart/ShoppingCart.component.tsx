@@ -74,12 +74,14 @@ const ShoppingCart = ({ cart }: Props) => {
         {cart.map((item, index) => (
           <tr key={item.slug}>
             <ProductCell>
-              <Image
-                src={`https:${item.images[0].fields.file.url}`}
-                alt={item.images[0].fields.title}
-                height="80"
-                width="80"
-              />
+              <Link href={`/products/${item.slug}`}>
+                <Image
+                  src={`https:${item.images[0].fields.file.url}`}
+                  alt={item.images[0].fields.title}
+                  height="80"
+                  width="80"
+                />
+              </Link>
               <Link href={`/products/${item.slug}`}>{item.name}</Link>
             </ProductCell>
             <StockCell align="left">In Stock</StockCell>

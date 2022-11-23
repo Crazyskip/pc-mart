@@ -18,6 +18,12 @@ img {
   vertical-align: bottom;
 }
 
+hr {
+  height: 1px;
+  border: none;
+  background-color: #ccc;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
