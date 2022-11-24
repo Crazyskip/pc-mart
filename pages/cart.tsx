@@ -34,7 +34,7 @@ const Cart: NextPage = () => {
                 Total:
                 <Total>${total}</Total>
                 <p>(Inc GST: ${gst.toFixed(0)})</p>
-                <Link href="/" legacyBehavior passHref>
+                <Link href="/checkout" legacyBehavior passHref>
                   <CheckoutButton>Checkout</CheckoutButton>
                 </Link>
               </CheckoutContainer>
