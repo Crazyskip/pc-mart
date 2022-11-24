@@ -2,7 +2,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "../../common/content-types";
 import { useAppDispatch } from "../../store/hooks";
 import { removeFromCart, setQuantity } from "../../store/slices/cartSlice";
@@ -26,6 +26,10 @@ const ShoppingCart = ({ cart }: Props) => {
   const [quantities, setQuantities] = useState<string[]>(
     cart.map((product) => String(product.quantity))
   );
+
+  useEffect(() => {
+    setQuantities(cart.map((product) => String(product.quantity)));
+  }, [cart]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>,
