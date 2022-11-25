@@ -19,7 +19,7 @@ export const ProductContainer = styled.div`
     display: none;
   }
 
-  @media (${device.medium}) {
+  @media (${device.small}) {
     width: calc(33.33333% - 6px);
 
     &:nth-of-type(1n + 9) {

@@ -12,6 +12,7 @@ import React from "react";
 import { Open_Sans } from "@next/font/google";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { device } from "../common/breakpoints";
 config.autoAddCss = false;
 
 const openSans = Open_Sans({ subsets: ["latin"] });
@@ -21,8 +22,12 @@ const MainContainer = styled.main`
 `;
 
 const ContentContainer = styled.div`
-  width: calc(100% - 209px);
+  width: 100%;
   padding: 10px 8px;
+
+  @media (${device.medium}) {
+    width: calc(100% - 209px);
+  }
 `;
 
 const HeaderMemo = React.memo(Header);

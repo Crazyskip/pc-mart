@@ -2,7 +2,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TypeProductFields } from "../../common/content-types";
 import { useAppDispatch } from "../../store/hooks";
 import { addToCart } from "../../store/slices/cartSlice";
@@ -22,6 +22,26 @@ interface Props {
 const Product = ({ product }: Props) => {
   const dispatch = useAppDispatch();
   const [disabled, setDisabled] = useState(false);
+
+  const [reducedDescription, setReducedDescription] = useState(
+    product.description
+  );
+
+  useEffect(() => {
+    if (window.innerWidth > 600) {
+      if (product.description.length > 300) {
+        setReducedDescription(`${product.description.substring(0, 300)}...`);
+      } else {
+        setReducedDescription(product.description);
+      }
+    } else {
+      if (product.description.length > 150) {
+        setReducedDescription(`${product.description.substring(0, 150)}...`);
+      } else {
+        setReducedDescription(product.description);
+      }
+    }
+  }, [product.description]);
 
   const addItem = () => {
     setDisabled(true);
@@ -45,7 +65,7 @@ const Product = ({ product }: Props) => {
         <div>
           <Link href={`/products/${product.slug}`}>{product.name}</Link>
         </div>
-        <p>{product.description}</p>
+        <p>{reducedDescription}</p>
       </ProductDescription>
       <PriceBox>
         <Price>${product.price}</Price>

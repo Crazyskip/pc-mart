@@ -69,7 +69,8 @@ export const CartContainer = styled.div`
   }
 `;
 
-export const Details = styled.div`
+export const CartDetails = styled.div`
+  display: none;
   font-size: 0.8rem;
   font-weight: 700;
   text-align: right;
@@ -91,6 +92,10 @@ export const Details = styled.div`
     &:hover {
       color: rgb(53, 122, 183);
     }
+  }
+
+  @media (${device.small}) {
+    display: block;
   }
 `;
 

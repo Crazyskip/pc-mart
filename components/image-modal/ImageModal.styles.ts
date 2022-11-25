@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../common/breakpoints";
 
 export const ImageModalContainer = styled.div`
   position: absolute;
@@ -18,6 +19,15 @@ export const ImageContainer = styled.div`
 
   img {
     z-index: 999;
+    width: 90%;
+    height: auto;
+  }
+
+  @media (${device.large}) {
+    img {
+      width: auto;
+      height: 90%;
+    }
   }
 `;
 

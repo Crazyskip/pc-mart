@@ -37,7 +37,6 @@ const ImageModal = ({ image, closeModal, handleDisplayImageChange }: Props) => (
         height={image.fields.file.details.image?.height}
         width={image.fields.file.details.image?.width}
         alt="product"
-        style={{ height: "90%", width: "auto" }}
         quality={100}
       />
     </ImageContainer>

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import {
   CartContainer,
+  CartDetails,
   CategoriesContainer,
-  Details,
   HeaderContainer,
   Logo,
   MainNav,
@@ -77,12 +77,12 @@ const Header = () => {
           </SearchButton>
         </SearchForm>
         <CartContainer>
-          <Details>
+          <CartDetails>
             <Link href="/cart">
               {cartItemCount} ITEMS | ${cartValue}
             </Link>
             <Link href="/cart">View Cart / Checkout</Link>
-          </Details>
+          </CartDetails>
           <Link href="/cart">
             <FontAwesomeIcon icon={faCartShopping} size="2xl" />
           </Link>

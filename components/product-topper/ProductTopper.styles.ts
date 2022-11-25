@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../common/breakpoints";
 
 interface ImageSelectorProps {
   count: number;
@@ -6,10 +7,14 @@ interface ImageSelectorProps {
 
 export const Title = styled.h1`
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   margin-bottom: 2px;
   margin-top: 10px;
   color: rgb(53, 167, 230);
+
+  @media (${device.small}) {
+    font-size: 1.8rem;
+  }
 `;
 
 export const Model = styled.span`
@@ -27,21 +32,45 @@ export const Model = styled.span`
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+
+  @media (${device.medium}) {
+    flex-direction: row;
+  }
 `;
 
 export const Thumbnail = styled.div`
   cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  img {
+    width: 300px;
+  }
+
+  @media (${device.xLarge}) {
+    display: block;
+    width: auto;
+  }
 `;
 
 export const ImageSlider = styled.div`
   display: flex;
-  margin: 25px 0;
+  flex-direction: column;
+  align-items: center;
+  margin: 25px 0 15px 0;
   width: 100%;
-  max-width: 78%;
 
   img {
     margin-right: 2px;
+  }
+
+  @media (${device.xLarge}) {
+    flex-direction: row;
+    align-items: flex-start;
   }
 `;
 
@@ -65,13 +94,26 @@ export const SelectImage = styled.div`
 `;
 
 export const PriceBox = styled.div`
-  height: 100%;
-  margin-top: auto;
-  margin-bottom: auto;
-  width: calc(100% - 1000px);
-  min-width: calc(20% - 15px);
   text-align: center;
-  margin-right: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+
+  @media (${device.small}) {
+    max-width: 400px;
+  }
+
+  @media (${device.medium}) {
+    height: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: calc(100% - 1000px);
+    min-width: 200px;
+    margin-right: 5px;
+  }
+
+  @media (${device.large}) {
+    min-width: calc(25% - 15px);
+  }
 `;
 
 export const Price = styled.div`

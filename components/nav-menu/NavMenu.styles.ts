@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { device } from "../../common/breakpoints";
 
 export const NavMenuContainer = styled.nav`
+  display: none;
   width: 209px;
 
   ul {
@@ -26,5 +28,9 @@ export const NavMenuContainer = styled.nav`
         }
       }
     }
+  }
+
+  @media (${device.medium}) {
+    display: block;
   }
 `;
